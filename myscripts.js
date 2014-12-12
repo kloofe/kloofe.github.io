@@ -5,7 +5,6 @@ function increaseWeight() {
 }
 
 function checkWeight() {
-	alert(weight);
 	if(weight >= 10) {
 		window.location.hash="3";
 	}
