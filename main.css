@@ -1,0 +1,27 @@
+body {
+	background: #6c2c40;
+}
+.border {
+	position: absolute;
+	width: 700px;
+	height: 650px;
+	padding: 15px;
+	background: url("http://s3.amazonaws.com/neopets_pictures/Layouts/___________/purpletile.png");
+	left: 50%;
+	margin-left: -350px;
+	margin-top: 50px;
+}
+#box {
+	background: #883038;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+.inside {
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+}
+.padding {
+	padding: 10px;
+}
