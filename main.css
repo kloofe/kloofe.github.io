@@ -1,18 +1,50 @@
+a {
+	color: #a8890e;
+	text-decoration: none;
+	font-weight: bold;
+}
+a:hover {
+	color: #5a1d30;
+}
+b {
+	color: #a8890e;
+}
+.title {
+	position: absolute;
+	top: 320px;
+	left: 50%;
+	margin-left: 200px;
+	background: url("https://s3.amazonaws.com/website_story/title.png") no-repeat;
+	width: 505px;
+	height: 218px;
+}
 body {
-	background: #6c2c40;
+	background: url("http://colourlovers.com.s3.amazonaws.com/images/patterns/4596/4596479.png");
+	font: 12.5pt "Times New Roman";
+	color: #eadede;
+	line-height: 1.3em;
+}
+.band {
+	position: absolute;
+	top: 280px;
+	left: 0px;
+	width: 100%;
+	height: 300px;
+	display: block;
+	background: url("https://s3.amazonaws.com/website_story/transparent_tile.png");
 }
 .border {
 	position: absolute;
 	width: 700px;
 	height: 650px;
 	padding: 15px;
-	background: url("http://s3.amazonaws.com/neopets_pictures/Layouts/___________/purpletile.png");
+	background: url("https://s3.amazonaws.com/website_story/transparent_tile.png");
 	left: 50%;
-	margin-left: -350px;
+	margin-left: -600px;
 	margin-top: 50px;
 }
 #box {
-	background: #883038;
+	background: #372544;
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
