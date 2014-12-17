@@ -11,7 +11,7 @@ function increaseWeight2(w) {
 }
 
 function checkWeight2() {
-	if(nameCall > 0 || weight > 8) {
+	if(nameCall > 0 || weight > 5) {
 		window.location.hash="9";
 	}
 	else {
@@ -20,7 +20,7 @@ function checkWeight2() {
 }
 
 function checkWeight3() {
-	if(weight > 5) {
+	if(weight > 3) {
 		window.location.hash="10a";
 	}
 	else {
