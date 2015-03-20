@@ -33,7 +33,7 @@ $(document).ready(function setupDivs() {
 		this.state = 'hidden';
 		this.onclick = function() { galleryDisplay(this) };
 	});
-	$('.hoverImg').each(function() {
+	$('.gallery td .hoverImg').each(function() {
 		if($(this).width() > $(this).height() && $(this).width() > screen.width) {
 			this.style.width = $(this).width()/3;
 		}
@@ -112,9 +112,11 @@ function toggle(el) {
 
 <div class="box" id="about">
 <h1 style="text-align: right;">About <span style="color: #efefef;">Me</span></h1>
+<p>
 Hey there! I'm Nina Volkmuth, a Computer Science major who's studying at the University of California, Irvine. My first exposure to developing on a computer goes back several years ago to when I first discovered HTML and CSS. It was love at first sight, and I've never looked back. Since then, I've branched out into other programming languages leading up to where I am today, but I'm not stopping. I have more to learn, and I'm eager to continue my pursuit of knowledge in programming and design while refining and sharpening the skills I already possess.
 <br><br>
 Besides programming, another way in which I like to express my creativity is art. I'm a mainly digital artist though I've done some traditional work. When I'm not drawing or programming, you can find me hanging out with my friends, surfing the web, or playing a video game or two. 
+</p>
 </div>
 
 <!------------- PORTFOLIO ------------->
