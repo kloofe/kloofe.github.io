@@ -6,6 +6,15 @@ body {
 	margin: 0;
 	padding: 0;
 }
+a:link, a:visited, a:active {
+	text-decoration: underline;
+	font-weight: bold;
+	color: #363636;
+}
+a:hover {
+	text-decoration: none;
+	color: #646464;
+}
 .collapsed {
 	position: relative;
 	margin-left: 20px;
@@ -43,12 +52,27 @@ body {
 	border: none;
 	background: none;
 }
-.projects td {
-	font-size: 10px!important;
-}
 .projInfo img {
 	padding: 10px;
 	background: url("https://s3.amazonaws.com/neopets_pictures/Layouts/Tiles/40w.png");
+	width: 400px;
+}
+.gallery td img {
+	padding: 5px;
+	background: url("https://s3.amazonaws.com/neopets_pictures/Layouts/Tiles/40w.png");
+	width: 75px;
+	height: 75px;
+}
+.gallery td .hoverImg {
+	background: url("https://s3.amazonaws.com/neopets_pictures/Layouts/Tiles/40b.png");
+	padding: 10px;
+	display: none;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	width: auto;
+	height: auto;
+	margin-left: 0px;
 }
 .box {
 	padding: 100px 50px 100px 50px;
@@ -59,7 +83,9 @@ body {
 .box h1 {
 	font-size: 40pt;
 }
-#intro h1 {
+h3 {
+	font-size: 20pt;
+	padding: 10px;
 }
 #about {
 	background: #4cc8de;

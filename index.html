@@ -1,3 +1,4 @@
+
 <html>
 
 <head>
@@ -28,7 +29,39 @@ $(document).ready(function setupDivs() {
 		$(div).css("zIndex", 0);		
 		setRect($(this), div);
 	});
+	$('.gallery td').each(function() {
+		this.state = 'hidden';
+		this.onclick = function() { galleryDisplay(this) };
+	});
+	$('.gallery td .hoverImg').each(function() {
+		if($(this).width() > $(this).height() && $(this).width() > screen.width) {
+			this.style.width = $(this).width()/3;
+		}
+		else if($(this).width() <= $(this).height() && $(this).height() > screen.height) {
+			this.style.height = $(this).height()/3.5
+		}
+		this.style.marginLeft = -$(this).width()/2;
+		this.style.marginTop = -$(this).height()/2;
+	});
 });
+
+function galleryDisplay(el) {
+	if(el.state === 'hidden') {
+		img = $(el).find('.hoverImg');
+		img.show();
+		el.state = 'visible'
+		$(img).dimBackground({
+			darkness : 0.5
+		});
+	}
+	else {
+		img = $(el).find('.hoverImg');
+		img.show();
+		$(img).undim();
+		img.hide();
+		el.state = 'hidden';
+	}
+}
 
 function toggle(el) {
 	if (el.state === 'collapsed') {
@@ -72,22 +105,22 @@ function toggle(el) {
 
 <div class="box" id="intro">
 <h1>Hello, I'm <span style="color: #4cc8de;">Nina</span></h1>
-<h2 style="padding-left: 100px;">I'm a first-year Computer Science major who's studying at the University of California, Irvine.</h2>
+<h2 style="padding-left: 100px;">I'm a first-year Computer Science major with a passion for learning and creating.</h2>
 </div>
 
 <!------------- ABOUT ME ------------->
 
 <div class="box" id="about">
 <h1 style="text-align: right;">About <span style="color: #efefef;">Me</span></h1>
-Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+Hey there! I'm Nina Volkmuth, a Computer Science major who's studying at the University of California, Irvine. My first exposure to developing on a computer goes back several years ago to when I first discovered HTML and CSS. It was love at first sight, and I've never looked back. Since then, I've branched out into other programming languages leading up to where I am today, but I'm not stopping. I have more to learn, and I'm eager to continue my pursuit of knowledge in programming and design while refining and sharpening the skills I already possess.
 <br><br>
-The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+Besides programming, another way in which I like to express my creativity is art. I'm a mainly digital artist though I've done some traditional work. When I'm not drawing or programming, you can find me hanging out with my friends, surfing the web, or playing a video game or two. 
 </div>
 
 <!------------- PORTFOLIO ------------->
 
 <div class="box" id="portfolio">
-
+	
 <h1>My <span style="color: #e04fed;">Projects</span></h1>
 
 <table style="margin-left: auto; margin-right: auto;">
@@ -133,20 +166,133 @@ The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for t
 <div class="box" id="art">
 <h1 style="text-align: right;">My <span style="color: #efefef;">Art</span></h1>
 
-Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-<br><br>
-The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+<center>
+<table class="gallery" cellpadding="5">
+<tr>
+<td>
+<img src="Images/sehara.png">
+<img src="Images/sehara.png" class="hoverImg">
+</td>
+<td>
+<img src="Images/examples_style1.png">
+<img src="Images/examples_style1.png" class="hoverImg">
+</td>
+<td>
+<img src="Images/ameie_header.gif">
+<img src="Images/ameie_header.gif" class="hoverImg">
+</td>
+<td>
+<img src="Images/goshawk.png">
+<img src="Images/goshawk.png" class="hoverImg">
+</td>
+<td>
+<img src="Images/kaya_header.gif">
+<img src="Images/kaya_header.gif" class="hoverImg">
+</td>
+<td>
+<img src="Images/pic.png">
+<img src="Images/pic.png" class="hoverImg">
+</td>
+<td>
+<img src="Images/lookup_pic.png">
+<img src="Images/lookup_pic.png" class="hoverImg">
+</td>
+<td>
+<img src="Images/lookup_pic - Copy.png">
+<img src="Images/lookup_pic - Copy.png" class="hoverImg">
+</td>
+</tr>
+<tr>
+<td>
+<img src="Images/light_dark.png">
+<img src="Images/light_dark.png" class="hoverImg">
+</td>
+<td>
+<img src="Images/reliant.png">
+<img src="Images/reliant.png" class="hoverImg">
+</td>
+<td>
+<img src="Images/zogogu.png">
+<img src="Images/zogogu.png" class="hoverImg">
+</td>
+<td>
+<img src="Images/underwater.png">
+<img src="Images/underwater.png" class="hoverImg">
+</td>
+<td>
+<img src="Images/sailing.png">
+<img src="Images/sailing.png" class="hoverImg">
+</td>
+<td>
+<img src="Images/zoja.png">
+<img src="Images/zoja.png" class="hoverImg">
+</td>
+<td>
+<img src="Images/night.png">
+<img src="Images/night.png" class="hoverImg">
+</td>
+<td>
+<img src="Images/rigaldo.png">
+<img src="Images/rigaldo.png" class="hoverImg">
+</td>
+</tr>
+</table>
+</center>
+
+
 </div>
 
 
 <!------------- RESUME ------------->
 
 <div class="box" id="resume">
-<h1>My <span style="color: #4cc8de;">Resume</span></h1>
-
-Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-<br><br>
-The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+<h1>My <span style="color: #4cc8de;">Skills</span></h1>
+<table>
+<tr>
+<td style="vertical-align:top;">
+<ul>
+<li>Java</li>
+	<li style="list-style-type:none">
+		<ul>
+		<li>Learned Java through two classes in Highschool</li>
+		</ul>
+	</li>
+<li>Python</li>
+	<li style="list-style-type:none">
+		<ul>
+		<li>Taking introductory programming/Python class series at UCI</li>
+		</ul>
+	</li>
+<li>Unity Game Engine</li>
+	<li style="list-style-type:none">
+		<ul>
+		<li>Learned through some game teams</li>
+		<li>Scripting in C#</li>
+		</ul>
+	</li>
+</ul>
+</td>
+<td style="vertical-align:top;">
+<ul>
+<li>Web Design</li>
+	<li style="list-style-type:none">
+		<ul>
+		<li>Self taught</li>
+		<li>HTML</li>
+		<li>CSS</li>
+		<li>Javascript/JQuery</li>
+		</ul>
+	</li>
+<li>Knowledge of Photoshop</li>
+	<li style="list-style-type:none">
+		<ul>
+		<li>Self taught</li>
+		</ul>
+	</li>
+</ul>
+</td>
+</tr>
+</table>
 </div>
 
 <!------------- CONTACT ------------->
@@ -161,7 +307,8 @@ Thank you for visiting this site and taking the time to learn a little about me.
 <td  style="width: 50%; padding-left: 50px;">
 <h2 style="text-align: left;">nvolkmut@uci.edu</h2>
 </td>
-</div>
+</tr>
+</table>
 </div>
 
 </body>
