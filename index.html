@@ -33,7 +33,7 @@ $(document).ready(function setupDivs() {
 		this.state = 'hidden';
 		this.onclick = function() { galleryDisplay(this) };
 	});
-	$('.gallery td .hoverImg').each(function() {
+	$('.hoverImg').each(function() {
 		if($(this).width() > $(this).height() && $(this).width() > screen.width) {
 			this.style.width = $(this).width()/3;
 		}
