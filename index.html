@@ -48,7 +48,7 @@ $(document).ready(function setupDivs() {
 function galleryDisplay(el) {
 	if(el.state === 'hidden') {
 		img = $(el).find('.hoverImg');
-		img.show();
+		img.css('display', 'inline-block');
 		el.state = 'visible'
 		$(img).dimBackground({
 			darkness : 0.5
@@ -56,9 +56,8 @@ function galleryDisplay(el) {
 	}
 	else {
 		img = $(el).find('.hoverImg');
-		img.show();
 		$(img).undim();
-		img.hide();
+		img.css('display', 'none');
 		el.state = 'hidden';
 	}
 }
