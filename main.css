@@ -1,59 +1,72 @@
-a {
-	color: #a8890e;
-	text-decoration: none;
-	font-weight: bold;
-}
-a:hover {
-	color: #2b1b36;
-}
-b {
-	color: #a8890e;
-}
-.title {
-	position: absolute;
-	top: 320px;
-	left: 50%;
-	margin-left: 200px;
-	background: url("https://s3.amazonaws.com/website_story/title.png") no-repeat;
-	width: 505px;
-	height: 218px;
-}
 body {
-	background: url("http://colourlovers.com.s3.amazonaws.com/images/patterns/4596/4596479.png");
-	font: 12.5pt "Times New Roman";
-	color: #eadede;
-	line-height: 1.3em;
+	background-color: #efefef;
+	font-family: verdana;
+	font-size: 12pt;
+	color: #363636;
+	margin: 0;
+	padding: 0;
 }
-.band {
-	position: absolute;
-	top: 280px;
-	left: 0px;
+.collapsed {
+	position: relative;
+	margin-left: 20px;
+	margin-top: 20px;
+	width: 130px;
+	height: 130px;
+	z-index: 1;
+}
+.collapsed:hover {
+	cursor: pointer;
+}
+.collapsed:hover .name {
+	opacity: .5;
+}
+.expanded .name {
+	display: none;
+}
+.collapsed .name {
+	display: inline;
+}
+.name {
+	top: 30%;
+	position:absolute;
+	color: white;
+	font-size: 30pt;
+	text-align: center;
 	width: 100%;
-	height: 300px;
-	display: block;
-	background: url("https://s3.amazonaws.com/website_story/transparent_tile.png");
 }
-.border {
-	position: absolute;
-	width: 700px;
-	height: 650px;
-	padding: 15px;
-	background: url("https://s3.amazonaws.com/website_story/transparent_tile.png");
-	left: 50%;
-	margin-left: -600px;
-	margin-top: 50px;
+.projects {
+	position: relative;
+	top: 10%;
+	left: 10%;
+	width: 80%;
+	height: 80%;
+	border: none;
+	background: none;
 }
-#box {
-	background: #372544;
-	width: 100%;
-	height: 100%;
-	overflow: hidden;
+.projects td {
+	font-size: 10px!important;
 }
-.inside {
-	width: 100%;
-	height: 100%;
-	overflow: auto;
-}
-.padding {
+.projInfo img {
 	padding: 10px;
+	background: url("https://s3.amazonaws.com/neopets_pictures/Layouts/Tiles/40w.png");
+}
+.box {
+	padding: 100px 50px 100px 50px;
+	position: relative;
+	width: auto;
+	height: auto;
+}
+.box h1 {
+	font-size: 40pt;
+}
+#intro h1 {
+}
+#about {
+	background: #4cc8de;
+}
+#art {
+	background: #e04fed;
+}
+#contact {
+	background: #4cc8de;
 }

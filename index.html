@@ -1,553 +1,169 @@
-﻿<html>
+<html>
+
 <head>
 <link rel="stylesheet" type="text/css" href="main.css" media="screen" />
-<script type="text/javascript" src="myscripts.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://www.jqueryscript.net/demo/jQuery-Plugin-To-Dim-The-Current-Page-Background-Dim-Background/jquery.dim-background.js"></script>
+<script type="text/javascript">
+function setRect(div, matchedDiv) {
+   $(matchedDiv).offset($(div).offset());
+   $(matchedDiv).height($(div).height());
+   $(matchedDiv).width($(div).width());
+}
+
+$(document).ready(function setupDivs() {
+    $("div.collapsed").each(function() {
+		var div=document.createElement("div");
+		var cDiv=$(this)[0];
+		cDiv.matchedDiv=div;
+		var iframe = $(this).children("iframe");
+		cDiv.iframe = iframe;
+		$(div).append(iframe);
+		$(iframe).css("display", "none");
+		cDiv.state = 'collapsed';
+		div.onclick=function() { toggle(cDiv);};
+		$("body").append(div);
+		$(div).css("position", "absolute");
+		$(div).css("display", "hidden");
+		$(div).css("zIndex", 0);		
+		setRect($(this), div);
+	});
+});
+
+function toggle(el) {
+	if (el.state === 'collapsed') {
+		el.matchedDiv.style.left = $(el).offset().left;
+		el.matchedDiv.style.top = $(el).offset().top;
+		el.matchedDiv.style.background=el.style.background;
+
+		$(el.matchedDiv).animate({top: $(window).scrollTop() + (screen.height*.05), left:"5%", width:"90%", height:"90%"}, 1000, function() {
+			el.matchedDiv.style.position = "fixed";
+			el.matchedDiv.style.top = (screen.height*.05);
+			$(el.iframe).css("display", "block");
+		});
+		el.matchedDiv.style.zIndex=10;
+		$(el.matchedDiv).dimBackground({
+		darkness : 0.5
+		});
+		el.state = 'expanded';
+	}
+	else {
+		el.matchedDiv.style.position = "absolute";
+		el.matchedDiv.style.top = $(window).scrollTop() + (screen.height*.05);
+		$(el.iframe).css("display", "none");		
+		$(el.matchedDiv).undim();
+		$(el.matchedDiv).animate({top:$(el).offset().top, left:$(el).offset().left, width:$(el).width(), height:$(el).height() }, 1000, function() { 
+			el.style.top = null;
+			el.style.left = null;
+			el.matchedDiv.style.zIndex = 0;
+			el.matchedDiv.style.background = null;
+			el.matchedDiv.style.position = "absolute";
+		});
+		el.matchedDiv.style.display = "hidden";
+		el.state = "collapsed";
+	}
+}
+
+</script>
 </head>
-
 <body>
-<div class="band"></div>
 
-<div class="title"></div>
+<!------------- INTRO ------------->
 
-<div class="border">
+<div class="box" id="intro">
+<h1>Hello, I'm <span style="color: #4cc8de;">Nina</span></h1>
+<h2 style="padding-left: 100px;">I'm a first-year Computer Science major who's studying at the University of California, Irvine.</h2>
+</div>
 
-	<div id="box">
-	
-		<a name="start"></a>
-		<div class="inside">
-			<div class="padding">
-			<center><b>Note: Please do not refresh the page in the midst of your adventure and ensure that you have javascript enabled. If any part of the screen is cut off, make sure your window is maximized.</b></center>
-			<br>
-			You hear the Name before you see it. The gentle murmuring caresses you while its distinct thrum matches the pulse of your throbbing ankle. Lifting your eyes, you look up through the tangle of broken branches leading up the hill. At the top, there is a small patch of air that lightly shimmers, twisting and somersaulting around itself in tune to the rhythmic thrumming. Most Names are mesmerizing but this one in particular suspends your attention for an unnaturally long time. Simply gazing at it makes you feel at peace and soothes the sharp pain in your ankle. You watch as the air dances along to its own song, telling the past, present, and future of a... You squint and look towards the center of the twirling air. A girl. It's telling the past, present, and future of a girl. As she kneels down to inspect the broken branches next to the path she is on, the translucent, wavering veil shifts in tune to her movements. 
-			<br><br>
-			Despite your distance, it is still obvious that this girl is gifted in the healing arts. Her Name reverberates with a tranquilizing power that makes you yearn for relief from the pain you are in, but you still hesitate calling out for her. If she were to help you, she would be forced to make the trek down the path of destruction you had blazed, endangering herself. Yet, without her you are stuck. 
-			<br><br>
-			<a href="#1" onclick="increaseWeight(1)">♔ Call out for help. There is less than an hour of daylight left and she might be the last person you see before night falls.</a><br>
-			<a href="#1a">♔ Leave her be. You have a feeling that you will turn out okay one way or another.</a>
-			</div>
-		</div>
-		
-		<a name="1"></a>
-		<div class="inside">
-			<div class="padding">
-			Deciding that you might be in serious trouble if night were to fall, you call out, “Excuse me, miss! Would you mind assisting me?”
-			<br><br>
-			The girl looks down from her perch and shapes her mouth into an 'o' when she spots you at the bottom of the hill. She shouts, “Would you like me to go get some help?”
-			<br><br>
-			You shake your head and say, “No, your help will be sufficient.” She bobs her head up and down and starts the descent, alternating between sliding and carefully stepping through the brush. 
-			<br><br>
-			As she draws closer, you are able to get a better look at her. She is a young girl who looks as though an ant could blow her over. Scraps of cloth are tied together and wrapped around her thin limbs, and what might have been fair skin and hair are ingrained with dirt and mud, which are not just from climbing down the hill. Most of it looks as though it was already dried and caked on from something before, becoming a part of her body. Her Name's subtle imperfections also become clearer. Its movement, which appeared whimsical from a far, seems to border on a frenzy on closer inspection. It is clear that she is not yet aware of the power she possesses.
-			<br><br>
-			“Are you sure I can help?” She asks uncertainly as she comes and squats besides you. She glances at your leg that you had stretched out. Your ankle is swollen several times its size and splattered with purple bruises. 
-			<br><br>
-			“Of course you can,” You encourage. “Simply place your hands on my ankle and close your eyes.”
-			<br><br>
-			She looks doubtful but does as told, closing her eyes and placing her cool hands on your hot skin. “How's this going to help?” she questions while opening a single eye to peak at you.
-			<br><br>
-			You smile and say, “You're going to perform magic.”
-			<br><br>
-			She instantly pulls her hands away, opens both eyes, and replies, “Oh no, sir. I'm no mage.”
-			<br><br>
-			Leaning over, you grab her hands and gently place them back onto your ankle. “Don't worry; I'll guide you.”
-			<br><br>
-			She bites her lip but stays silent and waits for your next instructions.
-			<br><br>
-			“Imagine you're a pipe and there's water flowing through you. You want to channel that water from your center, through your arms, and into my ankle. The only difference between that and what will actually occur is that the water will be energy. Once the energy enters, you will not have to control it anymore.”
-			<br><br>
-			The girl scrunches her forehead in concentration, but after several minutes, she opens her eyes and says, “I don't think I'm doing it right.”
-			<br><br>
-			What she says is true. You haven't felt or seen any change in your state. It occurs to you that <a href="#2" onclick="increaseWeight(5)">you could probably take control over her Name and command her to do it, letting her learn that way,</a> or <a href="#2a">you could let her try by herself some more. She hadn't been trying for too long anyway.</a>
-			</div>
-		</div>
-		
-		<a name="1a"></a>
-		<div class="inside">
-			<div class="padding">
-			You conclude that you do not want to put the girl at any unnecessary risk and decide to wait for someone else to come or maybe even move yourself back to your house. You had just begun to decide which was your best option when you hear a call from above. 
-			<br><br>
-			“Hey, sir! Are you okay done there?”
-			<br><br>
-			“I think I broke my ankle,” you shout in reply.
-			<br><br>
-			“Oh! Wait a minute!” The girl calls back before starting to descend the slope, alternating between sliding and carefully stepping through the brush. 
-			<br><br>
-			As she draws closer, you are able to get a better look at her. She is a young girl who looks as though an ant could blow her over. Scraps of cloth are tied together and wrapped around her thin limbs, and her skin and hair are ingrained with dirt and mud, which are not just from climbing down the hill. Most of it looks as though it was already dried and caked on from something before, becoming a part of her body. Her Name's subtle imperfections also become clearer. Its movement, which appeared whimsical from a far, seems to border on a frenzy on closer inspection. It is clear that she is not yet aware of the power she possesses.
-			<br><br>
-			“How can I help? I can go get a doctor,” She asks uncertainly as she comes and squats besides you. She glances at your leg that you had stretched out. Your ankle is swollen several times its size and splattered with purple bruises. 
-			<br><br>
-			“There's no need to get anyone else. Simply place your hands on my ankle and close your eyes.”
-			<br><br>
-			She looks doubtful but does as told, closing her eyes and placing her cool hands on your hot skin. “How's this going to help?” she questions while opening a single eye to peak at you.
-			<br><br>
-			You smile and say, “You're going to perform magic.”
-			<br><br>
-			She instantly pulls her hands away, opens both eyes, and replies, “Oh no. I'm no mage.”
-			<br><br>
-			Leaning over, you grab her hands and gently place them back onto your ankle. “Don't worry; I'll guide you.”
-			<br><br>
-			She bites her lip but stays silent and waits for your next instructions.
-			<br><br>
-			“Imagine you're a pipe and there's water flowing through you. You want to channel that water from your center, through your arms, and into my ankle. The only difference between that and what will actually occur is that the water will be energy. Once the energy enters, you will not have to control it anymore.”
-			<br><br>
-			The girl scrunches her forehead in concentration, but after several minutes, she opens her eyes and says, “I don't think I'm doing it right.”
-			<br><br>
-			What she says is true. You haven't felt or seen any change in your state. It occurs to you that <a href="#2" onclick="increaseWeight2(5)">you could probably take control over her Name and command her to do it, letting her learn that way,</a> or <a href="#2a">you could let her try by herself some more. She hadn't been trying for too long anyway.</a>
-			</div>
-		</div>
-		
-		<a name="2"></a>
-		<div class="inside">
-			<div class="padding">
-			You start murmuring the complex Name under your breathe. The girl's eyes droop and her pupils dilate, and the swirling air around her slows its twists and tumbles to a near halt. The Name's thrumming also drastically decreases its tempo. After she's completely under your control, you talk her through the healing process again. This time a cool wave floods into your ankle, and you can feel the shattered bone reconnect itself. The pain diminished into a dull ache, and that is all that remains of your broken ankle. Even the bruises and cuts from the branches are healed, not just on your ankle but all over your body. 
-			<br><br>
-			Satisfied with the state of your injuries, you check on the girl. She's slowly gaining control over herself again; her Name resumes its rapid dance, and its thrumming quickens once again though both are slightly slower than before. The girl looks around disoriented, but her gaze finally focuses on you with what seems a great deal of effort. With concern warming her eyes, the girl asks, “It's alright?”
-			<br><br>
-			You nod your gratitude and say, “For your first time manipulating magic, you did a magnificent job.” The girl smiles wearily up at me and attempts to stand as well, but as soon as she gets to her feet, she sinks back down to her knees. The amount of energy she exerted must had been tremendous. Her fragile frame seems as though it will shatter. 
-			<br><br>
-			<a href="#3" onclick="increaseWeight(1)">♔ Help her up.</a><br>
-			<a href="#3a">♔ Let her get up by herself.</a>
-			</div>
-		</div>
-		
-		<a name="2a"></a>
-		<div class="inside">
-			<div class="padding">
-			You decide to let her try by herself. Mistakes are the best teacher, after all. You endure the pain while you wait; your only relief is the girl's cool hands on your ankle. Several minutes slip by, though you're not completely sure how many, but eventually you feel a small tingle. Gradually the sensation builds into a cool wave, and you can feel the bone fuse itself together bit by bit. When the girl removes her hands, the bruises have faded slightly, and the swelling has gone down considerably. You stand up and ease all your weight onto your ankle. It lightly throbs and feels stiff, but you can walk on it. 
-			<br><br>
-			Pretty satisfied with the state of your ankle, you check on the girl. She's rubbing her eyes and lets out a wide yawn. With concern warming her eyes, the girl looks up to you and asks, “It's alright?”
-			<br><br>
-			You nod your gratitude and say, “For your first time manipulating magic, you did a magnificent job.” The girl smiles wearily up at me and attempts to stand as well, but as soon as she gets to her feet, she sinks back down to her knees. The amount of energy she exerted must had been tremendous. Her fragile frame seems as though it will shatter. 
-			<br><br>
-			<a href="#3" onclick="increaseWeight(1)">♔ Help her up.</a><br>
-			<a href="#3a">♔ Let her get up by herself.</a>
-			</div>
-		</div>
-		
-		<a name="3"></a>
-		<div class="inside">
-			<div class="padding">
-			You extend a hand towards her, which she takes gratefully. After you help her up, you let her lean on you. As she collects herself, you say, “By the way, I don't think we've introduced ourselves. I'm...”
-			<br><br>
-			What do you introduce yourself as?
-			<br><br>
-			<input id="mainName"></input>
-			<br><br>
-			<a href="#" onclick="getName()">♔ Next</a>
-			</div>
-		</div>
+<!------------- ABOUT ME ------------->
 
-		<a name="3a"></a>
-		<div class="inside">
-			<div class="padding">
-			You simply watch her as she gets back up again, more slowly this time but she is able to stand. As she collects herself, you say, “By the way, I don't think we've introduced ourselves. I'm...”
-			<br><br>
-			What do you introduce yourself as?
-			<br><br>
-			<input id="mainName2"></input>
-			<br><br>
-			<a href="#" onclick="getName2()">♔ Next</a>
-			</div>
-		</div>
-		
-		<a name="4"></a>
-		<div class="inside">
-			<div class="padding">
-			“I'm <span id="placeName1"></span>. What's your name?”
-			<br><br>
-			“Kari,” she says. Laughing weakly, she adds, “Sorry. I feel kinda weird.”
-			<br><br>
-			You offer her a sad smile and explain, “It's one of the side-affects of performing magic, especially healing magic. It saps a lot of your own energy, and it takes a while to recover it, depending on how much you used. I myself can only do very simple spells so I've never experienced any extreme drain in my energy but others have said recovering your energy after healing can take an hour or two.”
-			<br><br>
-			A moment of silence passes that's broken when Kari's stomach rumbles. She flushes, embarrassed.
-			<br><br>
-			<a href="#5" onclick="increaseWeight(2)">♔ Offer her food.</a><br>
-			<a href="#5a">♔ Tell her she can go.</a>
-			</div>
-		</div>
-		
-		<a name="4a"></a>
-		<div class="inside">
-			<div class="padding">
-			“I'm <span id="placeName4"></span>. What's your name?”
-			<br><br>
-			“Kari,” she says. Laughing weakly, she adds, “Sorry. I feel kinda weird.”
-			<br><br>
-			You offer her a sad smile and explain, “It's one of the side-affects of performing magic, especially healing magic. It saps a lot of your own energy, and it takes a while to recover it, depending on how much you used. I myself can only do very simple spells so I've never experienced any extreme drain in my energy but others have said recovering your energy after healing can take an hour or two.”
-			<br><br>
-			A moment of silence passes that's broken when Kari's stomach rumbles. She flushes, embarrassed.
-			<br><br>
-			“Why don't you have a meal at my house. It's the least I could do after what you've done for me,” you offer.
-			<br><br>
-			Kari tries to hide how excited she is, but it's clear she can't resist. “That would be nice.”
-			<br><br>
-			“Though we should probably let your parents know first,” you add as an after thought. 
-			<br><br>
-			Her excitement dies down a little and she casts her eyes off to the side, saying, “Oh, I've got no parents. It's just me.” 
-			<br><br>
-			It's quiet for a few seconds before you say, “I'm sorry.”
-			<br><br>
-			“It's ok,” she says, meeting your gaze once again.
-			<br><br>
-			“Well, I suppose we should get going,” you say in attempt to maneuver out of the uncomfortable atmosphere. She agrees, and so you help her up the hill and head towards your house. Most of the way is spent in silence though both of you attempt to spark a conversation every once in a while. As you round the bend that leads up to the house, Kari halts and stares. The house, or rather mansion, is outlined by the sinking sun. Clean, well-trimmed bushes lead up to the front door, which is flanked by large, white columns on either side. As the sky darkens, the lights in the windows turn on one by one, encircling the house in a warm glow. You look down beside you and smile at her awe-struck face. Grabbing her hand, you lead her into the light. 
-			<br><br>
-			While you walk up the steps to the door, it swings inwards, and you're greeted by one of your butlers: “Welcome home, Master <span id="placeName7"></span>.” 
-			<br><br>
-			“Good evening, Sebastian,” you say in reply as you step into the house with Kari. Sebastian nods towards Kari who answers with an awkward curtsy. 
-			<br><br>
-			“Sebastian, please set the table for two in the east dining room,” you ask. 
-			<br><br>
-			“Right away, Master <span id="placeName5"></span>.” Sebastian bows and excuses himself before hurrying away. 
-			<br><br>
-			You take off in the same direction that Sebastian left in except at a slower pace. Kari lags slightly behind you, absorbing the details of the house. You occasionally pass by a small group of maids methodically dusting and cleaning, and every time they stop their work to greet both you and Kari before resuming their tasks. Each are dressed in the same uniform and seem to work tirelessly.
-			<br><br>
-			“They're like little dolls,” Kari comments after you come across the third band of maids thus far. 
-			<br><br>
-			“They're good workers,” you say, reaching towards the door that leads to the dining room. Opening the door releases a myriad of smells- chicken, pasta, fresh-baked bread, and various spices. Kari salivates behind you as she breathes in deeply. You motion for her to take a seat at one end of the long table, and you sit down next to her. 
-			<br><br>
-			With a curious glance at the silverware carefully laid out next to the plate, she grabs a piece of chicken with her hands, and takes a ravenous bite out of it. Smacking her lips together, savory juice runs down her chin, which she wipes off with the back of her hand. 
-			<br><br>
-			You observe her for a bit while debating whether or not inform her of her bad manners. 
-			<br><br>
-			<a href="#6" onclick="increaseWeight(2)">♔ Tell her how to use silverware.</a><br>
-			<a href="#6a">♔ Let it slide.</a>
-			</div>
-		</div>
+<div class="box" id="about">
+<h1 style="text-align: right;">About <span style="color: #efefef;">Me</span></h1>
+Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+<br><br>
+The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+</div>
 
-		<a name="5"></a>
-		<div class="inside">
-			<div class="padding">
-			“Why don't you have a meal at my house. It's the least I could do after what you've done for me,” you offer.
-			<br><br>
-			Kari tries to hide how excited she is, but it's clear she can't resist. “That would be nice.”	
-			<br><br>
-			“Though we should probably let your parents know first,” you add as an after thought. 
-			<br><br>
-			Her excitement dies down a little and she casts her eyes off to the side, saying, “Oh, I've got no parents. It's just me.” 
-			<br><br>
-			It's quiet for a few seconds before you say, “I'm sorry.”
-			<br><br>
-			“It's ok,” she says, meeting your gaze once again.
-			<br><br>
-			“Well, I suppose we should get going,” you say in attempt to maneuver out of the uncomfortable atmosphere. She agrees, and so you help her up the hill and head towards your house. Most of the way is spent in silence though both of you attempt to spark a conversation every once in a while. As you round the bend that leads up to the house, Kari halts and stares. The house, or rather mansion, is outlined by the sinking sun. Clean, well-trimmed bushes lead up to the front door, which is flanked by large, white columns on either side. As the sky darkens, the lights in the windows turn on one by one, encircling the house in a warm glow. You look down beside you and smile at her awe-struck face. Grabbing her hand, you lead her into the light. 
-			<br><br>
-			While you walk up the steps to the door, it swings inwards, and you're greeted by one of your butlers: “Welcome home, Master <span id="placeName2"></span>.” 
-			<br><br>
-			“Good evening, Sebastian,” you say in reply as you step into the house with Kari. Sebastian nods towards Kari who answers with an awkward curtsy. 
-			<br><br>
-			“Sebastian, please set the table for two in the east dining room,” you ask. 
-			<br><br>
-			“Right away, Master <span id="placeName3"></span>.” Sebastian bows and excuses himself before hurrying away. 
-			<br><br>
-			You take off in the same direction that Sebastian left in except at a slower pace. Kari lags slightly behind you, absorbing the details of the house. You occasionally pass by a small group of maids methodically dusting and cleaning, and every time they stop their work to greet both you and Kari before resuming their tasks. Each are dressed in the same uniform and seem to work tirelessly.
-			<br><br>
-			“They're like little dolls,” Kari comments after you come across the third band of maids thus far. 
-			<br><br>
-			“They're good workers,” you say, reaching towards the door that leads to the dining room. Opening the door releases a myriad of smells- chicken, pasta, fresh-baked bread, and various spices. Kari salivates behind you as she breathes in deeply. You motion for her to take a seat at one end of the long table, and you sit down next to her. 
-			<br><br>
-			With a curious glance at the silverware carefully laid out next to the plate, she grabs a piece of chicken with her hands, and takes a ravenous bite out of it. Smacking her lips together, savory juice runs down her chin, which she wipes off with the back of her hand. 
-			<br><br>
-			You observe her for a bit while debating whether or not inform her of her bad manners. 
-			<br><br>
-			<a href="#6" onclick="increaseWeight(2)">♔ Tell her how to use silverware.</a><br>
-			<a href="#6a">♔ Let it slide.</a>
-			</div>
-		</div>
-		
-		<a name="5a"></a>
-		<div class="inside">
-			<div class="padding">
-			“You must be hungry. Why don't you go home to get some rest and food?” you say.
-			<br><br>
-			“Yeah, I suppose I should. Though I'll probably have to skip out on the food part. I was foraging for food before I found you, but I hadn't found anything yet. I think I'm too tired now to try again,” Kari replies. 
-			<br><br>
-			“Do you live by yourself?” you ask, surprised. 
-			<br><br>
-			She casts her eyes off to the side and quietly says, “Yeah.”
-			<br><br>
-			<a href="#5b" onclick="increaseWeight(1)">♔ Offer her a meal at your house.</a><br>
-			<a href="#5c">♔ Let her leave.</a>
-			</div>
-		</div>
-		
-		<a name="5b"></a>
-		<div class="inside">
-			<div class="padding">
-			“Why don't you have a meal at my house then. It's the least I could do after what you've done for me,” you offer.
-			<br><br>
-			Kari immediately perks up though she tries to hide exactly how excited she it. It's clear that she can't resist, though. “Are you sure? That would be nice.” 
-			<br><br>
-			“Of course,” you smile. “Let's get going.” She agrees, and so you help her up the hill and head towards your house. Most of the way is spent in silence though both of you attempt to spark a conversation every once in a while. As you round the bend that leads up to the house, Kari halts and stares. The house, or rather mansion, is outlined by the sinking sun. Clean, well-trimmed bushes lead up to the front door, which is flanked by large, white columns on either side. As the sky darkens, the lights in the windows turn on one by one, encircling the house in a warm glow. You look down beside you and smile at her awe-struck face. Grabbing her hand, you lead her into the light. 
-			<br><br>
-			While you walk up the steps to the door, it swings inwards, and you're greeted by one of your butlers: “Welcome home, Master  <span id="placeName8"></span>.” 
-			<br><br>
-			“Good evening, Sebastian,” you say in reply as you step into the house with Kari. Sebastian nods towards Kari who answers with an awkward curtsy. 
-			<br><br>
-			“Sebastian, please set the table for two in the east dining room,” you ask. 
-			<br><br>
-			“Right away, Master <span id="placeName6"></span>.” Sebastian bows and excuses himself before hurrying away. 
-			<br><br>
-			You take off in the same direction that Sebastian left in except at a slower pace. Kari lags slightly behind you, absorbing the details of the house. You occasionally pass by a small group of maids methodically dusting and cleaning, and every time they stop their work to greet both you and Kari before resuming their tasks. Each are dressed in the same uniform and seem to work tirelessly.
-			<br><br>
-			“They're like little dolls,” Kari comments after you come across the third band of maids thus far. 
-			<br><br>
-			“They're good workers,” you say, reaching towards the door that leads to the dining room. Opening the door releases a myriad of smells- chicken, pasta, fresh-baked bread, and various spices. Kari salivates behind you as she breathes in deeply. You motion for her to take a seat at one end of the long table, and you sit down next to her. 
-			<br><br>
-			With a curious glance at the silverware carefully laid out next to the plate, she grabs a piece of chicken with her hands, and takes a ravenous bite out of it. Smacking her lips together, savory juice runs down her chin, which she wipes off with the back of her hand. 
-			<br><br>
-			You observe her for a bit while debating whether or not inform her of her bad manners. 
-			<br><br>
-			<a href="#6" onclick="increaseWeight(2)">♔ Tell her how to use silverware.</a><br>
-			<a href="#6a">♔ Let it slide.</a>
-			</div>
-		</div>
-		
-		<a name="5c"></a>
-		<div class="inside">
-			<div class="padding">
-			It's quiet for a few moments before you say, “I'm sorry.”
-			<br><br>
-			“It's ok,” she says, meeting your gaze again. “Well, I should get going,” she quickly adds. You stand still as she turns and makes her way back up the hill, admiring her Name. Irregardless of its imperfections, it truly is a sight to behold. You can already tell the difference that using her magic for the first time had on her Name. The rhythm of both the sound and movement has a more organized beat than before, and it seems as though the Name's dance is more enthusiastic. You grin at her back; now that she's exposed to her own magic, her future is definitely looking bright.
-			<br><br>
-			<center>
-			<a href="http://kloofe.github.io/">Play again?</a>
-			</center>
-			</div>
-		</div>
-		
-		<a name="6"></a>
-		<div class="inside">
-			<div class="padding">
-			You reach and grab her napkin, offering it to her. “You don't want to get your hands dirty. Here, you can use this.”
-			<br><br>
-			“Thank you,” she says. 
-			<br><br>
-			“You can also use the fork and knife,” you say. She cocks her head, and so you gesture towards your own. “You can use it like this.” You demonstrate how you cut the chicken with the fork and knife and then pick it up with the fork. Watching you closely, Kari slowly mimics you. 
-			<br><br>
-			“Very good,” you say encouragingly. 
-			<br><br>
-			The rest of the meal passes with significantly less slurping and smacking. When both of you are finished, a few maids enter the room to retrieve the empty dishes. While they clear the table, Kari fidgets in her chair and looks around the room, probably for the first time considering that her focus was on the food for the most part. The room is fairly spacious though empty save the dining table in the center. The walls are adorned with large, floor-to-ceiling portraits of men and women dressed in extravagant robes, but despite their regal appearance, their eyes are cold as they stare down at you and Kari.
-			<br><br>
-			“Who are those people?” Kari asks, referring to the people in the portraits.
-			<br><br>
-			“They're the past owners of this house. One day I will probably get myself a portrait as well,” you answer. Kari nods slightly, scratching the dirt on her arm offhandedly. She's a stark contrast to the cleanliness of the house. 
-			<br><br>
-			<a href="#7" onclick="increaseWeight(1)">♔ Offer her a bath.</a><br>
-			<a href="#7a">♔ Do nothing.</a>
-			</div>
-		</div>
+<!------------- PORTFOLIO ------------->
 
-		<a name="6a"></a>
-		<div class="inside">
-			<div class="padding">
-			You remain silent for the rest of the meal as she continues smacking and slurping. When both of you are finished, a few maids enter the room to retrieve the empty dishes. While they clear the table, Kari fidgets in her chair and looks around the room, probably for the first time considering that her focus was on the food for the most part. The room is fairly spacious though empty save the dining table in the center. The walls are adorned with large, floor-to-ceiling portraits of men and women dressed in extravagant robes, but despite their regal appearance, their eyes are cold as they stare down at you and Kari.
-			<br><br>
-			“Who are those people?” Kari asks, referring to the people in the portraits.
-			<br><br>
-			“They're the past owners of this house. One day I will probably get myself a portrait as well,” you answer. Kari nods slightly, scratching the dirt on her arm offhandedly. She's a stark contrast to the cleanliness of the house. 
-			<br><br>
-			<a href="#7">♔ Offer her a bath.</a><br>
-			<a href="#7a">♔ Do nothing.</a>
-			</div>
-		</div>			
-		
-		<a name="7"></a>
-		<div class="inside">
-			<div class="padding">
-			“Would you like to take a bath?” you ask. 
-			<br><br>
-			“A bath? I haven't had one of those in ages...” Kari says. You could tell, but you keep that fact to yourself. “Can I really take one?”
-			<br><br>
-			“Of course,” you say as you get up to call a maid. You grab one in the adjacent kitchen and instruct her to help bathe Kari. When the maid asks about clothes, you say:
-			<br><br>
-			<a href="#8" onclick="increaseWeight(1)">♔ Give her new clothes.</a><br>
-			<a href="#8a">♔ Let her wear her old rags.</a>
-			</div>
-		</div>
+<div class="box" id="portfolio">
 
-		<a name="7a"></a>
-		<div class="inside">
-			<div class="padding">
-			She begins fidgeting in her seat, picking at the dirt imprinted on her clothes.
-			<br><br>
-			<a href="#8b" onclick="increaseWeight(1)">♔ Offer her a change of clothes.</a><br>
-			<a href="#8c">♔ Let her wear her old rags.</a>
-			</div>
-		</div>
-		
-		<a name="8"></a>
-		<div class="inside">
-			<div class="padding">
-			The maid curtsies, goes into the dining room to get Kari, and helps her to one of the baths. While you wait, Sebastian stops by the room and gives you a book to read. You're skimming through the pages when Kari returns. When she walks in, you barely recognize her. The mud and grime from her once brown skin has been scrubbed away, leaving her skin light and pink but fresh. Her hair is neatly combed back, and she is wearing a spare maid uniform. It's slightly baggy but is a huge improvement from her previous clothes. 
-			<br><br>
-			Kari opens her mouth to say something, but before she can, Sebastian enters the room and tells you, “Master <span id="placeName9"></span>, one of the maids has fallen down the stairs and is in need of immediate medical attention.”
-			<br><br>
-			“I can help,” Kari says. You must look slightly surprised because she adds, “You've done a lot for me, and you did say I can be a healer.”
-			<br><br>
-			“Fair enough. Come. Sebastian, lead the way,” you say, wasting no time. Both of you follow Sebastian through several hallways until you reach a grand staircase near the front entrance. At the bottom, there's a young woman bleeding profusely from her head. You and Kari go pale at the sight as you rush over. Kari kneels down next to the woman and places her hands onto the woman's sticky head. 
-			<br><br>
-			“I, uh, do the same thing as before, right?” she asks.
-			<br><br>
-			<a href="#" onclick="checkWeight2()">Next</a>
-			</div>
-		</div>	
-		
-		<a name="8a"></a>
-		<div class="inside">
-			<div class="padding">
-			The maid curtsies, goes into the dining room to get Kari, and helps her to one of the baths. While you wait, Sebastian stops by the room and gives you a book to read. You're skimming through the pages when Kari returns. When she walks in, you barely recognize her. The mud and grime from her once brown skin has been scrubbed away, leaving her skin light and pink but fresh. Her hair is neatly combed back, and the only thing marring her appearance is her old clothes. 
-			<br><br>
-			Kari opens her mouth to say something, but before she can, Sebastian enters the room and tells you, “Master <span id="placeName10"></span>, one of the maids has fallen down the stairs and is in need of immediate medical attention.”
-			<br><br>
-			“I can help,” Kari says. You must look slightly surprised because she adds, “You've done a lot for me, and you did say I can be a healer.”
-			<br><br>
-			“Fair enough. Come. Sebastian, lead the way,” you say, wasting no time. Both of you follow Sebastian through several hallways until you reach a grand staircase near the front entrance. At the bottom, there's a young woman bleeding profusely from her head. You and Kari go pale at the sight as you rush over. Kari kneels down next to the woman and places her hands onto the woman's sticky head. 
-			<br><br>
-			“I, uh, do the same thing as before, right?” she asks.
-			<br><br>
-			<a href="#" onclick="checkWeight2()">Next</a>
-			</div>
-		</div>		
-		
-		<a name="8b"></a>
-		<div class="inside">
-			<div class="padding">
-			“Why don't we get you a new change of clothes,” you say. 
-			<br><br>
-			“Yes, please!” she says immediately though she ducks her head afterward, embarrassed by her outburst.
-			<br><br>
-			You chuckle to yourself as you get up to call a maid. You grab one in the adjacent kitchen and instruct her to help get Kari a change of clothes. The maid curtsies, goes into the dining room to get Kari, and leaves to help her get a change a clothes. While you wait, Sebastian stops by the room and gives you a book to read. You're skimming through the pages when Kari returns. Though her skin is still dirty, her hair is neatly combed back, and she is wearing a spare maid uniform. It's slightly baggy but is a huge improvement from her previous clothes. 
-			<br><br>
-			Kari opens her mouth to say something, but before she can, Sebastian enters the room and tells you, “Master <span id="placeName11"></span>, one of the maids has fallen down the stairs and is in need of immediate medical attention.”
-			<br><br>
-			“I can help,” Kari says. You must look slightly surprised because she adds, “You've done a lot for me, and you did say I can be a healer.”
-			<br><br>
-			“Fair enough. Come. Sebastian, lead the way,” you say, wasting no time. Both of you follow Sebastian through several hallways until you reach a grand staircase near the front entrance. At the bottom, there's a young woman bleeding profusely from her head. You and Kari go pale at the sight as you rush over. Kari kneels down next to the woman and places her hands onto the woman's sticky head. 
-			<br><br>
-			“I, uh, do the same thing as before, right?” she asks.
-			<br><br>
-			<a href="#" onclick="checkWeight2()">Next</a>
-			</div>
-		</div>	
-		
-		<a name="8c"></a>
-		<div class="inside">
-			<div class="padding">
-			You don't offer her anything as you both sit there at the table. You're about to ask whether she would like to go home when Sebastian enters the room and tells you, “Master <span id="placeName12"></span>, one of the maids has fallen down the stairs and is in need of immediate medical attention.”
-			<br><br>
-			“I can help,” Kari says. You must look slightly surprised because she adds, “You did provide me a meal, and you did say I can be a healer.”
-			<br><br>
-			“Fair enough. Come. Sebastian, lead the way,” you say, wasting no time. Both of you follow Sebastian through several hallways until you reach a grand staircase near the front entrance. At the bottom, there's a young woman bleeding profusely from her head. You and Kari go pale at the sight as you rush over. Kari kneels down next to the woman and places her hands onto the woman's sticky head. 
-			<br><br>
-			“I, uh, do the same thing as before, right?” she asks.
-			<br><br>
-			<a href="#" onclick="checkWeight2()">Next</a>
-			</div>
-		</div>
-		
-		<a name="9"></a>
-		<div class="inside">
-			<div class="padding">
-			“Yes,” you say, watching her. She closes her eyes and furrows her brow, but several minutes pass without any changes. You worry as you behold the woman's lifeblood flow out of her. It's plain to see that Kari would not be able to save the woman in time if you did not interfere. Without any more thought, you will her Name under your control. The air encompassing her slows to a sluggish crawl as the Name submits to you. Rapidly speaking under your breath, you direct Kari in the healing process. The result is nearly instantaneous. The wound seals itself close, and color returns to the woman's face. You release your hold on Kari as the woman's eyes flutter open. This time Kari's Name is barely half of the speed and volume it was before. 
-			<br><br>
-			Once the woman is fully conscious, she starts crying and clasps onto Kari, mumbling thank you over and over again. Kari groggily returns the hug. Gradually the woman's weeping subsides, and she composes herself enough to string together a coherent sentence: “Thank you, sweetheart. You definitely saved my life. Are you going to stay here?” The woman looks imploringly at Kari, awaiting an answer.
-			<br><br>
-			You shoot a glance at the woman and mutter under your breath. She immediately corrects herself, “If it's okay with Master <span id="placeName13"></span>, of course.”
-			<br><br>
-			You nod in agreement and say, “You are more than welcome to stay here, Kari.”
-			<br><br>
-			Kari notices the glance that went between you and the maid and says, “Thank you very much, but I think I'll leave. It's very nice here but I can get by just fine on my own.”
-			<br><br>
-			You frown, convinced that she would stay. After all you have done for her and all you could offer her, it seems obvious that she would prefer living here over living outside on her own. Not to mention that with a little bit of guidance, Kari could serve as a wonderful healer. She's making a mistake declining your offer.
-			<br><br>
-			Kari turns to leave, but you grab her thin shoulder. She turns to face you with fear starting to glaze her eyes. In a weak attempt to get away, she tries to push you back, but you hold firm. Was this what you got after all you had done for her? Anger warms the pit of your stomach as you whisper Kari's Name. Her eyelids droop, and her pupils dilate as she once again surrenders to your control. You motion to Sebastian who walks over.
-			<br><br>
-			“Find her a room,” you order. Casting your glance over to the woman who was still on the floor, you add, “And, you. Help him.”
-			<br><br>
-			She lifts herself up and goes to stand next to Sebastian, already positioned next to Kari. The three of them leave and go up the stairs. The air around them swirls in sync as they disappear into the depths of your house.
-			<br><br>
-			<center><a href="http://kloofe.github.io/">Play again?</a></center>
-			</div>
-		</div>	
-		
-		<a name="9a"></a>
-		<div class="inside">
-			<div class="padding">
-			“Yes,” you say, watching her. She closes her eyes and furrows her brow, but several minutes pass without any changes. You worry as you behold the woman's lifeblood flow out of her. It's plain to see that Kari will not be able to save the woman in time if you do not interfere. 
-			<br><br>
-			<a href="#10">♔ Use her Name.</a><br>
-			<a href="#" onclick="checkWeight3()">♔ Do not use her Name.</a>
-			</div>
-		</div>
-		
-		
-		<a name="10"></a>
-		<div class="inside">
-			<div class="padding">
-			Without any more thought, you will her Name under your control. The air encompassing her slows to a sluggish crawl as the Name submits to you. Rapidly speaking under your breath, you direct Kari in the healing process. The result is nearly instantaneous. The wound seals itself close, and color returns to the woman's face. You release your hold on Kari as the woman's eyes flutter open. This time Kari's Name is barely half of the speed and volume it was before. 
-			<br><br>
-			Once the woman is fully conscious, she starts crying and clasps onto Kari, mumbling thank you over and over again. Kari groggily returns the hug. Gradually the woman's weeping subsides, and she composes herself enough to string together a coherent sentence: “Thank you, sweetheart. You definitely saved my life. Are you going to stay here?” The woman looks imploringly at Kari, awaiting an answer.
-			<br><br>
-			You shoot a glance at the woman and mutter under your breath. She immediately corrects herself, “If it's okay with Master <span id="placeName14"></span>, of course.”
-			<br><br>
-			You nod in agreement and say, “You are more than welcome to stay here, Kari.”
-			<br><br>
-			Kari notices the glance that went between you and the maid and says, “Thank you very much, but I think I'll leave. It's very nice here but I can get by just fine on my own.”
-			<br><br>
-			You frown, convinced that she would stay. After all you have done for her and all you could offer her, it seems obvious that she would prefer living here over living outside on her own. Not to mention that with a little bit of guidance, Kari could serve as a wonderful healer. She's making a mistake declining your offer.
-			<br><br>
-			Kari turns to leave, but you grab her thin shoulder. She turns to face you with fear starting to glaze her eyes. In a weak attempt to get away, she tries to push you back, but you hold firm. Was this what you got after all you had done for her? Anger warms the pit of your stomach as you whisper Kari's Name. Her eyelids droop, and her pupils dilate as she once again surrenders to your control. You motion to Sebastian who walks over.
-			<br><br>
-			“Find her a room,” you order. Casting your glance over to the woman who was still on the floor, you add, “And, you. Help him.”
-			<br><br>
-			She lifts herself up and goes to stand next to Sebastian, already positioned next to Kari. The three of them leave and go up the stairs. The air around them swirls in sync as they disappear into the depths of your house.
-			<br><br>
-			<center><a href="http://kloofe.github.io/">Play again?</a></center>
-			</div>
-		</div>	
-		
-		<a name="10a"></a>
-		<div class="inside">
-			<div class="padding">
-			You decide not to control Kari through her Name, watching helplessly as the woman gets paler and paler. Eventually, Kari pulls her hands away, sticky with warm blood. Tears slide down into the puddle of blood that formed on the floor, creating a diluted mixture of blood and tears. 
-			<br><br>
-			“I'm sorry,” Kari whispers. You all remain where you are for a few minutes before Kari finally moves. Standing up, she says, “I suppose I should leave now.”
-			<br><br>
-			“You can stay, you know,” you offer. 
-			<br><br>
-			“Thank you, but I think I'll leave. It's very nice here but I can get by just fine on my own.”
-			<br><br>
-			You frown, convinced that she would stay. After all you have done for her and all you could offer her, it seems obvious that she would prefer living here over living outside on her own. Not to mention that with a little bit of guidance, Kari could serve as a wonderful healer. She's making a mistake declining your offer.
-			<br><br>
-			Kari turns to leave, but you grab her thin shoulder. She turns to face you with fear starting to glaze her eyes. In a weak attempt to get away, she tries to push you back, but you hold firm. Was this what you got after all you had done for her? Anger warms the pit of your stomach as you whisper Kari's Name. Her eyelids droop, and her pupils dilate as she surrenders to your control. You motion to Sebastian who walks over.
-			<br><br>
-			“Find her a room,” you order. Sebastian positions himself next to Kari, and the two of them leave and go up the stairs. The air around them swirls in sync as they disappear into the depths of your house.
-			<br><br>
-			<center><a href="http://kloofe.github.io/">Play again?</a></center>
-			</div>
-		</div>
-		
-		<a name="10b"></a>
-		<div class="inside">
-			<div class="padding">
-			You decide not to control Kari through her Name, watching helplessly as the woman gets paler and paler. Eventually, Kari pulls her hands away, sticky with warm blood. Tears slide down into the puddle of blood that formed on the floor, creating a diluted mixture of blood and tears. 
-			<br><br>
-			“I'm sorry,” Kari whispers. You all remain where you are for a few minutes before Kari finally moves. Standing up, she says, “I suppose I should leave now.”
-			<br><br>
-			“You can stay, you know,” you offer. 
-			<br><br>
-			“Thank you, but I think I'll leave. It's very nice here but I can get by just fine on my own.” You don't reply as she walks towards the front door. As she opens the door, she looks back one last time and says, “Thank you again.”
-			<br><br>
-			She closes the door behind her, but you go to the window to watch her. Even in the darkness, you can see her Name shimmer. Irregardless of her Name's imperfections, it truly is a sight to behold. You can tell the difference that using her magic for the first time had on her Name. The rhythm of both the sound and movement has a more organized beat than before, and it seems as though the Name's dance is more enthusiastic. Despite the circumstances, you grin at her back; now that she's exposed to her own magic, her future is definitely looking bright. 
-			<br><br>
-			<center><a href="http://kloofe.github.io/">Play again?</a></center>
-			<IMG SRC="http://cgi.boingdragon.com/count/kloofe/9.gif" WIDTH=0 HEIGHT=0>
-			</div>
-		</div>
+<h1>My <span style="color: #e04fed;">Projects</span></h1>
 
-		
-	</div>
+<table style="margin-left: auto; margin-right: auto;">
+<tr>
+<td>
+<div class="transition collapsed" style="background: #4cc8de;" onClick="toggle(this)">
+<div class="name">1</div>
+<iframe src="project_ab2.html" class="projects"></iframe>
+</div>
+</td>
+<td>
+<div class="transition collapsed" style="background: #e04fed;" onClick="toggle(this)">
+<div class="name">2</div>
+<iframe src="project_flappy.html" class="projects"></iframe>
+</div>
+</td>
+<td>
+<div class="transition collapsed" style="background: #4cc8de;" onClick="toggle(this)">
+<div class="name">3</div>
+<iframe src="project_anteater.html" class="projects"></iframe>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class="transition collapsed" style="background: #e04fed;" onClick="toggle(this)">
+<div class="name">4</div>
+<iframe src="project_autumn.html" class="projects"></iframe>
+</div>
+</td>
+<td>
+<div class="transition collapsed" style="background: #4cc8de;" onClick="toggle(this)">
+<div class="name">5</div>
+<iframe src="project_shadowfax.html" class="projects"></iframe>
+</div>
+</td>
+</tr>
+</table>
+</div>
 
+<!------------- ART ------------->
+
+<div class="box" id="art">
+<h1 style="text-align: right;">My <span style="color: #efefef;">Art</span></h1>
+
+Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+<br><br>
+The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+</div>
+
+
+<!------------- RESUME ------------->
+
+<div class="box" id="resume">
+<h1>My <span style="color: #4cc8de;">Resume</span></h1>
+
+Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+<br><br>
+The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+</div>
+
+<!------------- CONTACT ------------->
+
+<div class="box" id="contact">
+<h1 style="text-align: right;">Thank <span style="color: #efefef;">You</span></h1>
+<table>
+<tr>
+<td style="width: 40%; border-right: 1px solid #363636; padding-right: 10px;">
+Thank you for visiting this site and taking the time to learn a little about me. If you have any questions, need to contact me, or just want to say hello, feel free to send me an email!
+</td>
+<td  style="width: 50%; padding-left: 50px;">
+<h2 style="text-align: left;">nvolkmut@uci.edu</h2>
+</td>
+</div>
 </div>
 
 </body>
+
 </html>
