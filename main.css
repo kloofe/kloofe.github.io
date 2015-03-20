@@ -57,21 +57,26 @@ a:hover {
 	background: url("https://s3.amazonaws.com/neopets_pictures/Layouts/Tiles/40w.png");
 	width: 400px;
 }
-.gallery td img {
+.gallery td .reg {
 	padding: 5px;
 	background: url("https://s3.amazonaws.com/neopets_pictures/Layouts/Tiles/40w.png");
 	width: 75px;
 	height: 75px;
 }
-.gallery td .hoverImg {
+.gallery td .hoverDiv {
 	display: none;
-	background: url("https://s3.amazonaws.com/neopets_pictures/Layouts/Tiles/40b.png");
-	padding: 10px;
 	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 1000;
+}
+.gallery td .hoverDiv .hoverImg {
 	top: 50%;
 	left: 50%;
-	width: auto;
-	height: auto;
+	background: url("https://s3.amazonaws.com/neopets_pictures/Layouts/Tiles/40b.png");
+	padding: 10px;
 }
 .box {
 	padding: 100px 50px 100px 50px;
